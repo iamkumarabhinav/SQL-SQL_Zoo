@@ -96,3 +96,71 @@ JOIN stops stopa ON (a.stop = stopa.id)
 JOIN stops stopb ON (b.stop = stopb.id)
 WHERE stopa.name = 'Craiglockhart'
 AND stopb.name = 'Sighthill'
+
+
+
+Mam wala
+
+filehandling demo
+
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+
+public class DataStreamDemo {
+	public static void main(String[] args){
+		try(FileInputStream fis=new FileInputStream("sample.dat");
+				DataInputStream dis=new DataInputStream(fis);
+				FileOutputStream fos=new FileOutputStream("sampleout.dat");) {
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
+
+}
+
+
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+
+public class TestCopyFile {
+
+	public static void main(String[] args) {
+		try (FileInputStream fis=new FileInputStream("sample.dat");
+			 FileOutputStream fos=new FileOutputStream("output.dat");){
+			
+			int i=fis.read();
+			while(i!=-1){
+				fos.write(i);
+				i=fis.read();
+			}
+			
+			} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}
+
+
+
+
