@@ -1015,6 +1015,243 @@ public class TestPlayerArray {
 
 
 
+package inheritance
+
+
+
+
+public abstract class Employee extends Person {
+	private String desg; 
+	private String dept;
+	private double sal;
+	public Employee() {
+		super();
+	}
+	public Employee(String name,int a,String bd,String pr,String desg, String dept, double sal) {
+		super(name,a, bd,pr);
+		this.desg = desg;
+		this.dept = dept;
+		this.sal = sal;
+	}
+	public String getDesg() {
+		return desg;
+	}
+	public void setDesg(String desg) {
+		this.desg = desg;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public double getSal() {
+		return sal;
+	}
+	public void setSal(double sal) {
+		this.sal = sal;
+	} 
+	public String toString(){
+		return super.toString()+"\nDesignation :"+desg+"\ndepartment "+dept +"\nsalary  :"+sal;
+	}
+	public double calculateSal(){
+		return sal+0.10*sal-0.5*sal;
+	}
+	
+}
+
+
+
+
+
+
+public class MyClass implements MyInterface1,MyInterface2
+{
+
+	@Override
+	public double method3() {
+		// TODO Auto-generated method stub
+		System.out.println("Inside method 3");
+		return 0;
+	}
+
+	@Override
+	public char method4() {
+		System.out.println("Inside method 4");
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int method1() {
+		System.out.println("Inside method 1");
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void method2() {
+		System.out.println("Inside method 2");
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+public interface MyInterface1 {
+	int method1();
+	void method2();
+
+}
+
+
+
+
+
+public interface MyInterface2 extends MyInterface1  {
+	double method3();
+	char method4();//public
+	int myvar=34;    //public static and final by default
+	default void method5(){      //default allowed above 1.8
+		System.out.println("in method5");
+	}
+}
+
+
+
+abstract public class Person {
+	static
+	{
+		count=0;
+	}
+	static int count;
+	private int perId;
+	private String perName;
+	private int age;
+	private String bDate;
+	private String mobNo; //if private not then access outside class
+	
+	public Person()
+	{
+		count++;
+		perId=count;
+		perName=null;
+		age=0;
+		bDate=null;
+		mobNo=null;
+	}
+	
+	public Person(String name,int a,String bd,String pr)
+	{
+		count++;
+		this.perId=count;
+		perName=name;
+		age=a;
+		bDate=bd;
+		mobNo=pr;
+	}
+	public int getPerId()
+	{
+		return perId;
+	}
+	public String getPerName()
+	{
+		return perName;
+	}
+	public int getAge()
+	{
+		return age;
+	}
+	public String getbDate()
+	{
+		return bDate;
+	}
+	public String getMobNo()
+	{
+		return mobNo;
+	}
+	public void setPerId(int m)
+	{
+		perId=m;
+	}
+	public void setPerName(String m)
+	{
+		perName=m;
+	}
+	public void setAge( int n)
+	{
+		age=n;
+	}
+	public void setbDate(String m)
+	{
+		bDate=m;
+	}
+	public void setMobNo(String n)
+	{
+		mobNo=n;
+	}
+	
+	public void display()
+	{
+		System.out.println("id : "+perId);
+		System.out.println("name : "+perName);
+		System.out.println("age : "+age);
+		System.out.println("bday : "+bDate);
+		System.out.println("mobile no. : "+mobNo);
+	}	
+	public String toString(){
+		return "\nid : "+perId +"\nname : "+perName+"\nage : "+age +"\nbday : "+bDate+"\nmobile no. : "+mobNo;
+	}
+	public abstract double calculateSal();
+}
+
+
+
+
+
+public class TestEmployee {
+	public static void main(String[] args)
+	{
+		//Person p=new Person("Ashu",24,"jan","6144");
+		
+		//Person e=new Employee("kishori",23,"21jan","6144","intern ","trining",7000);
+		//^Person e or Employee e 
+	//	e.calculateSal();
+		//System.out.println(e);
+	}
+
+}
+
+
+
+
+public class TestMyClass {
+	public static void main(String[] args)
+	{
+		MyClass ob =new MyClass();
+		ob.method1();
+		ob.method2();
+		ob.method3();
+		ob.method4();
+		ob.method5();
+		MyInterface1 ob1=new MyClass();
+		ob1.method1();
+	//	ob1.method3();
+	}
+
+}
 
 
 
