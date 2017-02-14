@@ -51,3 +51,292 @@ AND p.yr NOT IN
   FROM nobel c
   WHERE c.subject = 'Chemistry'
 )
+assignment 4
+
+
+
+public class TestFileAssignment {
+
+	public static void main(String[] args)
+	{
+		
+	}
+}
+
+
+import java.util.Date;
+
+abstract public class Person {
+	static{
+		
+		count=0;
+	}
+	static int count;
+	private int perId;
+	private String perName;
+	private int age;
+	private Date bDate;
+	private String mobNo;
+	
+	public Person(){
+		count++;
+		perId=count;
+		perName=null;
+		age=0;
+		bDate=null;
+		mobNo=null;
+	}
+	
+	public Person(String nm,int a,Date bd,String no){
+		count++;
+		this.perId=count;
+		perName=nm;
+		age=a;
+		bDate=bd;
+		mobNo=no;
+	}
+	
+	public void setPerId(int id){
+		 perId=id;
+	}
+	
+	public int getPerId(){
+		return perId;
+		
+	}
+	
+	public String getPerName() {
+		return perName;
+	}
+
+	public void setPerName(String perName) {
+		this.perName = perName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public Date getbDate() {
+		return bDate;
+	}
+
+	public void setbDate(Date bDate) {
+		this.bDate = bDate;
+	}
+
+	public String getMobNo() {
+		return mobNo;
+	}
+
+	public void setMobNo(String mobNo) {
+		this.mobNo = mobNo;
+	}
+	public String toString(){
+		return "Id : " +perId+ "\nName : "+perName
+				+"\nAge :"+age +"\nB'Date" +bDate
+				       +"\nMobile : "+mobNo;
+	}
+   
+	public void display(){
+		System.out.println("Id : "+this.perId);
+		System.out.println("Name : "+perName);
+		System.out.println("Age : "+age);
+		System.out.println("B'Date : "+bDate);
+		System.out.println("Mobile No : "+mobNo);
+	}
+}
+
+
+
+
+import java.util.Date;
+
+
+public abstract class Employee extends Person{
+	private String desg;
+	private String dept;
+	private double sal;
+	
+	public Employee() {
+		super();
+	}
+	public Employee(String nm,int a,Date bd,String no,String desg, String dept, double sal) {
+		super(nm,a,bd,no);
+		this.desg = desg;
+		this.dept = dept;
+		this.sal = sal;
+	}
+	public String getDesg() {
+		return desg;
+	}
+	public void setDesg(String desg) {
+		this.desg = desg;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public double getSal() {
+		return sal;
+	}
+	public void setSal(double sal) {
+		this.sal = sal;
+	}
+	abstract public double calculateSal(double a,int b);
+	
+//	public double calculateSal(){
+	//	return sal+0.10*sal+0.15*sal-0.5*sal;
+//	}
+	public String toString(){
+		return super.toString()+"\nDesignation : " +desg +"Department : "
+	                             +dept +"Salary : "+sal;
+		
+	}
+	 
+
+}
+
+
+
+import java.util.Date;
+
+public class ContractEmp extends Employee {
+
+	private double dailyall;
+	private int numdays;
+	public ContractEmp() {
+		super();
+	}
+
+	public ContractEmp(String nm, int a, Date bd, String no, String desg, String dept, double sal, double dailyall,int numdays)
+	{
+		super(nm, a, bd, no, desg, dept, sal);
+		this.dailyall = dailyall ;
+		this.numdays =  numdays;
+	}
+
+	public double calculateSal(double a,int b) {
+		return a*b;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+"\ndailyall=" + dailyall + "\n numdays=" + numdays;
+	}
+
+	public double getDailyall() {
+		return dailyall;
+	}
+
+	public void setDailyall(double dailyall) {
+		this.dailyall = dailyall;
+	}
+
+	public int getNumdays() {
+		return numdays;
+	}
+
+	public void setNumdays(int numdays) {
+		this.numdays = numdays;
+	}
+
+}
+
+
+
+
+import java.util.Date;
+
+public class Member extends Person {
+	private String type;
+	private int duration;
+	
+
+	public Member() {
+		super();
+	}
+
+	public Member(String nm, int a, Date bd, String no,String type,int duration) {
+		super(nm, a, bd, no);
+		this.type = type ;
+		this.duration = duration;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+	public String toString(){
+		return super.toString()+"\nMembership Type : " +type +"\nDuration : "
+	                             +duration;
+		
+	}
+	 
+
+}
+
+
+
+
+import java.util.Date;
+
+public class SalariedEmp extends Employee {
+	private double bonus;
+	private int leaves;
+
+	public SalariedEmp() {
+		super();
+	}
+
+	public SalariedEmp(String nm, int a, Date bd, String no, String desg, String dept, double sal,double bonus,int leaves) 
+	{
+		super(nm, a, bd, no, desg, dept, sal);
+		this.bonus = bonus ;
+		this.leaves =  leaves;
+	}
+	public double calculateSal(double s,int b) {
+		double k=1.1*s+b;
+		return k;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+"\n bonus=" + bonus + "\n leaves=" + leaves;
+	}
+
+	public double getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(double bonus) {
+		this.bonus = bonus;
+	}
+
+	public int getLeaves() {
+		return leaves;
+	}
+
+	public void setLeaves(int leaves) {
+		this.leaves = leaves;
+	}
+
+
+}
