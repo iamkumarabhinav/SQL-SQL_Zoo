@@ -187,3 +187,7 @@ public class TestProdConsumer {
 
 }
 */
+
+
+
+http://www.geeksforgeeks.org/producer-consumer-solution-using-threads-java/
