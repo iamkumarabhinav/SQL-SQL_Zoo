@@ -149,3 +149,129 @@ JOIN
 ) AS a
 ON casting.movieid = a.movieid
 WHERE actor.name <> 'Art Garfunkel'
+
+
+
+
+public class Storage {
+	private int n;
+	private boolean flag;
+	public Storage(){
+		n=-1;
+		flag=false;
+	}
+
+	synchronized  public void put(int x){
+		if(flag==true){
+			 try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}}
+		n=x;
+		flag=true;
+		System.out.println("Put : "+ n);
+		notify();
+	}
+	synchronized public void get(){
+		if(flag==false){
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Put : "+ n);
+		flag=false;
+		notify();
+	}
+
+}
+
+
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.io.FileInputStream;
+
+public class TestProdConsumer {
+
+	public static void main(String[] args)  {
+		int c=0;
+		final int capacity=2;
+		ArrayList<Integer> al=new ArrayList<>();
+		while(true)
+    	{
+			c++;
+    		File f=new File("Number.dat");	
+    		if(f.exists())
+    		{
+    			System.out.println("File exists :");
+    			try(DataInputStream dis=new DataInputStream(new FileInputStream(f));)
+    			{
+    				while(dis.available()>0 && capacity<3){
+    					int i=dis.readInt();
+    					System.out.println(i);
+    					al.add(i);	
+    				}
+    				
+    			}
+    			catch(EOFException e){
+    				System.out.println("all integers read");
+    			}catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+    		} 
+    		else
+    		{
+    			try(DataOutputStream dos=new DataOutputStream(new FileOutputStream(f));)
+    			{
+	                for(int i=0;i<10;i++)
+	                {
+	                	dos.writeInt(i);
+	                }
+	                dos.close();
+    			} 
+    			catch (FileNotFoundException e) 
+    			{
+	                e.printStackTrace();
+    			}
+    			catch (IOException e1) 
+    			{
+    				e1.printStackTrace();
+    			}
+
+    		}
+    		if(c==2)
+    			break;
+    	}//end of while
+		
+	/*	Storage s=new Storage();
+		Producer p=new Producer(s);
+		Consumer c=new Consumer(s);
+		p.start();
+		c.start();
+		try {
+			p.join();
+			c.join();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		System.out.println("End of Main");
+*/
+	}
+
+}
+
+
+
+
